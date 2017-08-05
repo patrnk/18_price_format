@@ -6,7 +6,7 @@ def has_decimal_point(price):
 
 
 def consists_of_digits_with_decimal_point(price):
-    integer_part, fraction_part = price.split('.')
+    integer_part, fraction_part = price.split('.', 1)
     return integer_part.isdigit() and fraction_part.isdigit()
 
 

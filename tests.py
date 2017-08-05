@@ -107,6 +107,11 @@ class IsCorrectlyFormattedTestCase(unittest.TestCase):
         output = format_price.is_correctly_formatted(test_input)
         self.assertFalse(output)
 
+    def test_is_correctly_formatted_returns_false_for_double_decimal_dot(self):
+        test_input = '0..0'
+        output = format_price.is_correctly_formatted(test_input)
+        self.assertFalse(output)
+
 
 class InsertSpaceEveryThreeDigitsTestCase(unittest.TestCase):
 
