@@ -45,4 +45,10 @@ def format_price(price):
 
 
 if __name__ == '__main__':
-    pass
+    price = input('Enter the price to process (e.g. "3245.000000"): ')
+    try:
+        formatted_price = format_price(price)
+    except ValueError as error:
+        print(error)
+    else:
+        print(formatted_price)
