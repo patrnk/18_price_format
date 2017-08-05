@@ -141,5 +141,32 @@ class IsCorrectlyFormattedTestCase(unittest.TestCase):
         self.assertFalse(output)
 
 
+class InsertSpaceEveryThreeDigitsTestCase(unittest.TestCase):
+
+    def test_insert_space_every_three_digits_correct_for_nine_digits(self):
+        test_input = '123456789'
+        expected_output = '123 456 789'
+        output = format_price.insert_space_every_three_digits(test_input)
+        self.assertEqual(output, expected_output)
+
+    def test_insert_space_every_three_digits_correct_for_eight_digits(self):
+        test_input = '12345678'
+        expected_output = '12 345 678'
+        output = format_price.insert_space_every_three_digits(test_input)
+        self.assertEqual(output, expected_output)
+
+    def test_insert_space_every_three_digits_correct_for_seven_digits(self):
+        test_input = '1234567'
+        expected_output = '1 234 567'
+        output = format_price.insert_space_every_three_digits(test_input)
+        self.assertEqual(output, expected_output)
+
+    def test_insert_space_every_three_digits_correct_for_one_digit(self):
+        test_input = '1'
+        expected_output = '1'
+        output = format_price.insert_space_every_three_digits(test_input)
+        self.assertEqual(output, expected_output)
+
+
 if __name__ == '__main__':
     unittest.main()

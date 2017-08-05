@@ -1,3 +1,6 @@
+import re
+
+
 def has_decimal_point(price):
     return '.' in price
 
@@ -21,11 +24,28 @@ def is_correctly_formatted(price):
     return all(format_check(price) for format_check in format_checks)
 
 
+def insert_space_every_three_digits(string_number):
+    reversed_number = string_number[::-1]
+    groups_of_three = re.findall('.{1,3}', reversed_number)
+    reversed_formatted_number = ' '.join(groups_of_three)
+    return reversed_formatted_number[::-1]
+
+
+def remove_trailing_zeros(string):
+    pass
+
+
 def format_price(price):
     if not isinstance(price, str):
         raise TypeError('Price must be a string')
     if not is_correctly_formatted(price):
         raise ValueError('The price is incorrectly formatted')
+    integer_part, fraction_part = price.split('.')
+    formatted_integer_part = insert_space_every_three_digits(integer_part)
+    formatted_fraction_part = remove_trailing_zeros(fraction_part)
+    if not formatted_fraction_part:
+        return formatted_integer_part
+    return ','.join(formatted_integer_part, formatted_fraction_part)
 
 
 if __name__ == '__main__':
