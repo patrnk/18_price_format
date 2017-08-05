@@ -17,8 +17,8 @@ class FormatCorrectPriceTestCase(unittest.TestCase):
         self.run_test(inputs, expected_outputs)
 
     def test_format_price_formats_floats(self):
-        inputs = ['5.000001', '3245.003000', '3003245.100000']
-        expected_outputs = ['5,000001', '3 245,003', '3 003 245,1']
+        inputs = ['0.000000', '0.000001', '5.000001', '3245.003000', '3003245.100000']
+        expected_outputs = ['0', '5,000001', '3 245,003', '3 003 245,1']
         self.run_test(inputs, expected_outputs)
 
 
@@ -47,13 +47,14 @@ class IsCorrectlyFormattedTestCase(unittest.TestCase):
             self.assertEqual(output, expected_output)
 
     def is_correctly_formatted_returns_true(self):
-        inputs = ['5.000000', '3245.001000', '3003245.999999']
+        inputs = ['0.000000', '0.000001', '5.000000', 
+                  '3245.001000', '3003245.999999']
         self.run_test(inputs, True)
 
     def is_correctly_formatted_returns_false(self):
         inputs = ['0005.000000', '3245', '-3003245.999999',
                   'Agent 007', 'NaN', '123.456', '123.E4',
-                  '.1', '+5.000000', 'infinity', '1e1']
+                  '.1', '+5.000000', 'infinity','53.', '1e1']
         self.run_test(inputs, False)
 
 
