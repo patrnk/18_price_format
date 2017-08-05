@@ -6,52 +6,19 @@ import format_price
 
 class FormatCorrectPriceTestCase(unittest.TestCase):
 
+    @patch.object(format_price, 'insert_space_every_three_digits', return_value='3 245')
     @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_single_digit_integer(self, patched_is_correctly_formatted):
-        test_input = '5.000000'
-        expected_output = '5'
-        output = format_price.format_price(test_input)
-        self.assertEqual(output, expected_output)
-
-    @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_thousands_value_integer(self, patched_is_correctly_formatted):
+    def test_format_price_returns_integer_without_fraction(self, patched_checked, patched_formatter):
         test_input = '3245.000000'
         expected_output = '3 245'
         output = format_price.format_price(test_input)
         self.assertEqual(output, expected_output)
 
+    @patch.object(format_price, 'insert_space_every_three_digits', return_value='3 245')
     @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_milions_value_integer(self, patched_is_correctly_formatted):
-        test_input = '3003245.000000'
-        expected_output = '3 003 245'
-        output = format_price.format_price(test_input)
-        self.assertEqual(output, expected_output)
-
-    @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_zero(self, patched_is_correctly_formatted):
-        test_input = '0.000000'
-        expected_output = '0'
-        output = format_price.format_price(test_input)
-        self.assertEqual(output, expected_output)
-
-    @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_one_digit_float(self, patched_is_correctly_formatted):
-        test_input = '0.000001'
-        expected_output = '0,000001'
-        output = format_price.format_price(test_input)
-        self.assertEqual(output, expected_output)
-
-    @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_float_with_leading_and_trailing_zeros(self, patched_is_correctly_formatted):
-        test_input = '0.003000'
-        expected_output = '0,003'
-        output = format_price.format_price(test_input)
-        self.assertEqual(output, expected_output)
-
-    @patch.object(format_price, 'is_correctly_formatted', return_value=True)
-    def test_format_price_formats_multiple_digit_float(self, patched_is_correctly_formatted):
-        test_input = '0.123000'
-        expected_output = '0,123'
+    def test_format_price_returns_float_without_trailing_zeroes(self, patched_checker, patched_formatter):
+        test_input = '3245.003400'
+        expected_output = '3 245,0034'
         output = format_price.format_price(test_input)
         self.assertEqual(output, expected_output)
 

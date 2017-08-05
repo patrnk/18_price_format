@@ -31,10 +31,6 @@ def insert_space_every_three_digits(string_number):
     return reversed_formatted_number[::-1]
 
 
-def remove_trailing_zeros(string):
-    pass
-
-
 def format_price(price):
     if not isinstance(price, str):
         raise TypeError('Price must be a string')
@@ -42,10 +38,10 @@ def format_price(price):
         raise ValueError('The price is incorrectly formatted')
     integer_part, fraction_part = price.split('.')
     formatted_integer_part = insert_space_every_three_digits(integer_part)
-    formatted_fraction_part = remove_trailing_zeros(fraction_part)
+    formatted_fraction_part = fraction_part.rstrip('0')
     if not formatted_fraction_part:
         return formatted_integer_part
-    return ','.join(formatted_integer_part, formatted_fraction_part)
+    return ','.join((formatted_integer_part, formatted_fraction_part))
 
 
 if __name__ == '__main__':
