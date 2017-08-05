@@ -46,12 +46,12 @@ class IsCorrectlyFormattedTestCase(unittest.TestCase):
             output = format_price.is_correctly_formatted(input_value)
             self.assertEqual(output, expected_output)
 
-    def is_correctly_formatted_returns_true(self):
+    def test_is_correctly_formatted_returns_true(self):
         inputs = ['0.000000', '0.000001', '5.000000', 
                   '3245.001000', '3003245.999999']
         self.run_test(inputs, True)
 
-    def is_correctly_formatted_returns_false(self):
+    def test_is_correctly_formatted_returns_false(self):
         inputs = ['0005.000000', '3245', '-3003245.999999',
                   'Agent 007', 'NaN', '123.456', '123.E4',
                   '.1', '+5.000000', 'infinity','53.', '1e1']
